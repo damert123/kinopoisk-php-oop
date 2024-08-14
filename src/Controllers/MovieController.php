@@ -25,6 +25,7 @@ class MovieController extends Controller
     {
 
 
+
         $validation = $this->request()->validate([
             'name' => ['required', 'min:3', 'max:50'],
         ]);
@@ -35,10 +36,16 @@ class MovieController extends Controller
             }
 
             $this->redirect('/admin/movies/add');
-            //dd('Validation Failed', $this->request()->errors());
+
         }
 
-        dd('Validation Succeeded');
+
+
+        $id = $this->db()->insert('movies', [
+            'name' => $this->request()->input('name')
+        ]);
+
+        dd("Movie added successfully with id: $id");
     }
 
 }
