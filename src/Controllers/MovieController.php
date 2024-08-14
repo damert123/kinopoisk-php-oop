@@ -23,6 +23,9 @@ class MovieController extends Controller
 
     public function store()
     {
+        $file = $this->request()->file('image');
+
+        $filePath = $file->move('movies');
 
 
 

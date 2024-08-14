@@ -1,7 +1,7 @@
 /vendor/
 
 .idea/
-
+public/storage
 /node_modules/
 
 /tmp/
