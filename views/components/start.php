@@ -11,3 +11,8 @@
     <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body>
+<header>
+    <h3>User: email</h3>
+    <button>Logout</button>
+    <hr>
+</header>
