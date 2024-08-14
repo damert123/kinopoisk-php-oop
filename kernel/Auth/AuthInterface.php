@@ -9,7 +9,7 @@ interface AuthInterface
 
     public function logout(): void;
     public function check(): bool;
-    public function user(): ?array;
+    public function user(): ?User;
 
     public function table(): string;
     public function username(): string;

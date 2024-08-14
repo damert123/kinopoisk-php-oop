@@ -22,6 +22,8 @@ return [
     Route::get('/login', [LoginController::class, 'index']),
     Route::post('/login', [LoginController::class, 'login']),
 
+    Route::post('/logout', [LoginController::class, 'logout']),
+
 
 
     Route::get('/test', function (){
