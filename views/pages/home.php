@@ -9,7 +9,7 @@
 <?php $view->component('start'); ?>
 
 
-<body class="d-flex flex-column min-vh-100">
+
 
 
 
