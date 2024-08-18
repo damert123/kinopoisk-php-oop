@@ -36,9 +36,16 @@ class CategoryService
 
     public function delete(int $id): void
     {
-        $this->db()->delete('categories', [
-            'id' => $this->request()->input('id'),
+        $this->db->delete('categories', [
+            'id' => $id,
         ]);
+
+    }
+
+    public function store(string $name): int
+    {
+        return $this->db->insert('categories', [
+            'name' => $name, ]);
 
     }
 
