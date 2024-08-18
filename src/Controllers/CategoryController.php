@@ -30,4 +30,11 @@ class CategoryController extends Controller
         $this->redirect('/admin');
     }
 
+    public function destroy()
+    {
+
+
+        $this->redirect('/admin');
+    }
+
 }
