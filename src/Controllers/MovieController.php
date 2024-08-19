@@ -6,9 +6,13 @@ use App\Kernel\Controller\Controller;
 use App\Kernel\Http\Redirect;
 use App\Kernel\Validator\Validator;
 use App\Kernel\View\View;
+use App\Services\CategoryService;
+use App\Services\MovieService;
 
 class MovieController extends Controller
 {
+
+    private MovieService $service;
     public function index(): void
     {
 
@@ -18,21 +22,17 @@ class MovieController extends Controller
     public function add(): void
     {
 
-        $this->view('admin/movies/add');
+
     }
 
-    public function store()
+    public function store(): void
     {
 
 
-        $file = $this->request()->file('image');
-
-        $filePath = $file->move('movies');
-
-        $this->storage()->url($filePath);
-
         $validation = $this->request()->validate([
             'name' => ['required', 'min:3', 'max:50'],
+            'description' => ['required'],
+            'category' => ['required'],
         ]);
 
         if (! $validation) {
@@ -44,13 +44,33 @@ class MovieController extends Controller
 
         }
 
+        $this->service()->store(
+          $this->request()->input('name'),
+          $this->request()->input('description'),
+          $this->request()->file('image'),
+          $this->request()->input('category'),
+        );
 
+        $this->redirect('/admin');
 
-        $id = $this->db()->insert('movies', [
-            'name' => $this->request()->input('name')
+    }
+
+    public function create(): void
+    {
+        $categories = new CategoryService($this->db());
+
+        $this->view('admin/movies/add', [
+            'categories' => $categories->all(),
         ]);
+    }
 
-        dd("Movie added successfully with id: $id");
+    private function service(): MovieService
+    {
+        if (! isset($this->service)) {
+            $this->service = new MovieService($this->db());
+        }
+
+        return $this->service;
     }
 
 }

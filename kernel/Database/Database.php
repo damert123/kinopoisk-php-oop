@@ -33,6 +33,7 @@ class Database implements DatabaseInterface
         try {
             $stmt->execute($data);
         } catch (\PDOException $exception) {
+            //dd($exception->getMessage());
             return false;
         }
 
@@ -93,6 +94,7 @@ class Database implements DatabaseInterface
         $sql = "SELECT * FROM $table $where";
 
         $stmt = $this->pdo->prepare($sql);
+
 
         $stmt->execute($conditions);
 
