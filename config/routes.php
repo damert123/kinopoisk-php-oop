@@ -26,6 +26,7 @@ return [
 
     Route::get('/admin/movies/add', [MovieController::class, 'create']),
     Route::post('/admin/movies/add', [MovieController::class, 'store']),
+    Route::post('/admin/movies/destroy', [MovieController::class, 'destroy']),
 
     Route::post('/logout', [LoginController::class, 'logout']),
 
