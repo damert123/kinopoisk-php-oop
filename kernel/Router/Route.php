@@ -17,6 +17,8 @@ class Route
 
     public static function get(string $uri, $action, array $middlewares = []): static
     {
+        
+
         return new static($uri, 'GET', $action, $middlewares);
     }
 

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Kernel\Controller\Controller;
 use App\Services\CategoryService;
+use App\Services\MovieService;
 
 class AdminController extends Controller
 {
@@ -16,11 +17,17 @@ class AdminController extends Controller
     {
 
         $categories = new CategoryService($this->db());
+        $movies = new MovieService($this->db());
 
 
-        $categories = $categories->all();
 
-        $this->view('admin/index', ['categories' => $categories]);
+
+
+
+        $this->view('admin/index', [
+            'categories' => $categories->all(),
+            'movies' => $movies->all(),
+        ]);
     }
 
 }
