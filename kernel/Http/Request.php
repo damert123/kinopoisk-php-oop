@@ -26,7 +26,6 @@ class Request implements RequestInterface
     {
         return new static($_GET, $_POST, $_SERVER, $_FILES, $_COOKIE);
 
-
     }
 
     public function uri():string
