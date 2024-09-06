@@ -93,4 +93,18 @@ class MovieService
 
     }
 
+    public function newMovies()
+    {
+        $movies = $this->db->get('movies', [], ['id' => 'DESC'], 5);
+
+        return array_map(function ($movie){
+            return new Movie(
+                $movie['id'],
+                $movie['name'],
+                $movie['description'],
+                $movie['preview'],
+                $movie['category_id'],
+            );
+        }, $movies);
+    }
 }
