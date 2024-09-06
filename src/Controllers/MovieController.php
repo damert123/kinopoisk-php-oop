@@ -119,4 +119,12 @@ class MovieController extends Controller
         return $this->service;
     }
 
+    public function show(): void
+    {
+        $this->view('movie', [
+            'movie' => $this->service()->find($this->request()->input('id')),
+
+        ]);
+    }
+
 }

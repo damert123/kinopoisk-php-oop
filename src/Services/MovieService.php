@@ -2,9 +2,11 @@
 
 namespace App\Services;
 
+use App\Kernel\Auth\User;
 use App\Kernel\Database\DatabaseInterface;
 use App\Kernel\Upload\UploadedFileInterface;
 use App\Models\Movie;
+use App\Models\Review;
 
 class MovieService
 {
@@ -40,6 +42,7 @@ class MovieService
                 $movie['description'],
                 $movie['preview'],
                 $movie['category_id'],
+                $movie['created_at'],
             );
         }, $movies);
     }
@@ -61,12 +64,21 @@ class MovieService
             return null;
         }
 
+
+
+
+
+
+
         return new Movie(
           $movie['id'],
           $movie['name'],
           $movie['description'],
           $movie['preview'],
           $movie['category_id'],
+          $movie['created_at'],
+          $this->getReviews($id)
+
         );
     }
 
@@ -104,7 +116,35 @@ class MovieService
                 $movie['description'],
                 $movie['preview'],
                 $movie['category_id'],
+                $movie['created_at'],
             );
         }, $movies);
+    }
+
+    private function getReviews(int $id): array
+    {
+        $reviews = $this->db->get('reviews', [
+            'movie_id' => $id,
+        ]);
+
+
+
+        return array_map(function ($review) {
+            $user = $this->db->first('users', [
+                'id' => $review['user_id'],
+            ]);
+            return new Review(
+                $review['id'],
+                $review['rating'],
+                $review['review'],
+                $review['created_at'],
+                new User(
+                    $user['id'],
+                    $user['name'],
+                    $user['email'],
+                    $user['password'],
+                )
+            );
+        }, $reviews);
     }
 }
