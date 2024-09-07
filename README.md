@@ -46,7 +46,20 @@ services:
 
    ```bash
    git clone https://github.com/ваш-аккаунт/kinopoisk-lite-php.git
-```
+   ```
+
+2. Установите зависимости с помощью Composer:
+
+   ```bash
+   composer install
+   ```
+3. Настройте окружение с использованием Lando:
+
+   ```bash
+      lando start
+   ```
+
+
 
 
 
