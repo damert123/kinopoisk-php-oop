@@ -117,6 +117,7 @@ class MovieService
                 $movie['preview'],
                 $movie['category_id'],
                 $movie['created_at'],
+                $this->getReviews($movie['id']) // FIXME: в данном случае это лишнее
             );
         }, $movies);
     }
